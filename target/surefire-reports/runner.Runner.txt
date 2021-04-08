@@ -1,0 +1,17 @@
+-------------------------------------------------------------------------------
+Test set: runner.Runner
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.458 sec <<< FAILURE! - in runner.Runner
+initializationError(runner.Runner)  Time elapsed: 0.01 sec  <<< ERROR!
+cucumber.runtime.CucumberException: Failed to parse resource at: file:/C:/Users/Apple/eclipse-workspace/CucumberPrgms/src/test/resources/Features/New.feature
+Caused by: gherkin.ParserException$CompositeParserException: 
+Parser errors:
+(1:1): expected: #EOF, #Language, #TagLine, #FeatureLine, #Comment, #Empty, got 'Scenario: Login scenario test for Gmail'
+(3:1): expected: #EOF, #Language, #TagLine, #FeatureLine, #Comment, #Empty, got 'Given navigate to Gmail page'
+(4:1): expected: #EOF, #Language, #TagLine, #FeatureLine, #Comment, #Empty, got 'When user logged in using username as ?<username>? and password as ?<password>?'
+(5:1): expected: #EOF, #Language, #TagLine, #FeatureLine, #Comment, #Empty, got 'Then home page should be displayed'
+(7:1): expected: #EOF, #Language, #TagLine, #FeatureLine, #Comment, #Empty, got 'Examples:'
+(8:1): expected: #EOF, #Language, #TagLine, #FeatureLine, #Comment, #Empty, got '|UserName                |Password    |'
+(9:1): expected: #EOF, #Language, #TagLine, #FeatureLine, #Comment, #Empty, got '|DemoDemo@22@gmail.com                |DemoToday    |'
+(10:1): expected: #EOF, #Language, #TagLine, #FeatureLine, #Comment, #Empty, got '|unkonow@gmail.com    |New   |'
+
