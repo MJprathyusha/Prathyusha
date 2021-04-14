@@ -1,4 +1,4 @@
-package runner;
+package StepDefinition;
 
 
 
@@ -17,7 +17,7 @@ import cucumber.api.junit.*;
 @CucumberOptions(
 
  features = "C:\\Users\\Apple\\eclipse-workspace\\CucumberPrgms\\src\\test\\resources\\Features\\CucumTestng1.feature",
- glue={"StepDefinition"},
+ glue={"runner"},
 		 plugin= {"json:target/Json_Output/cucumber.json"},
 
 // "json:target/Json_Output/cucumber.json"},

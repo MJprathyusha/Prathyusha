@@ -39,7 +39,7 @@ public class First {
 	@Test (priority=1)
 	public void TiltleOfThePage() {
 		String tittle=dr.getTitle();
-		Assert.assertEquals(tittle,"guru");
+		Assert.assertEquals(tittle,"Demo Site");
 		
 	
 	}

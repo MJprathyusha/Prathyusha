@@ -1,5 +1,9 @@
 package runner;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -10,6 +14,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -17,9 +24,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class Lumens {
+public class CucumberTestng {
 	WebDriver dr=null;
-	@Given("Google browser is open")
+	@Given("Google browser is openC")
 	public void google_browser_is_open() {
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Apple\\Downloads\\chromedriver_win32\\chromedriver.exe");
 	    dr=new ChromeDriver();
@@ -34,53 +41,82 @@ public class Lumens {
 	   
 	}
 
-	@Given("Verify  User is able to Create an account in Lumens application")
-	public void verify_User_is_able_to_Create_an_account_in_Lumens_application() {
-		dr.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		dr.navigate().refresh();
-		
-		Actions actions = new Actions(dr);
-		WebElement newaccount = dr.findElement(By.xpath("//*[@id=\"header-wrapper\"]/header/div[2]/div[4]/ul/li[2]/div/button/i"));
-		actions.moveToElement(newaccount).perform();
-		dr.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		dr.findElement(By.xpath("//*[@id=\"header-wrapper\"]/header/div[2]/div[4]/ul/li[2]/div/div/div/a")).click();
-		//dr.navigate().refresh();
-		dr.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		dr.findElement(By.xpath("//*[@id=\"createAccountBtn\"]/span")).click();
-		//dr.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		dr.findElement(By.id("dwfrm_profile_customer_firstname")).sendKeys("PrathyushaMJ");
-		dr.findElement(By.id("dwfrm_profile_customer_lastname")).sendKeys("M");
-		dr.findElement(By.id("dwfrm_profile_customer_email")).sendKeys("m.j.prathyusha12@gmail.com");
-		dr.findElement(By.id("dwfrm_profile_customer_emailconfirm")).sendKeys("m.j.prathyusha12@gmail.com");
-		dr.findElement(By.id("dwfrm_profile_login_password")).sendKeys("Mmurthy@2");
-	
-		dr.findElement(By.id("dwfrm_profile_login_passwordconfirm")).sendKeys("Mmurthy@2");
-		dr.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		
-		//*[@id="ltkpopup-close-button"]/a/svg
-		dr.findElement(By.xpath("//*[@id=\"RegistrationForm\"]/fieldset/div[4]/button")).click();
-		
-		dr.navigate().refresh();
-		
-		
-		
-		
-	}
+	/*
+	 * //@
+	 * Given("Verify  User is able to Create an account in Lumens application sheetname SheetName and rownumber RowNummber"
+	 * ) public void
+	 * verify_User_is_able_to_Create_an_account_in_Lumens_application() {
+	 * dr.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	 * dr.navigate().refresh();
+	 * 
+	 * Actions actions = new Actions(dr); WebElement newaccount =
+	 * dr.findElement(By.xpath(
+	 * "//*[@id=\"header-wrapper\"]/header/div[2]/div[4]/ul/li[2]/div/button/i"));
+	 * actions.moveToElement(newaccount).perform();
+	 * dr.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	 * dr.findElement(By.xpath(
+	 * "//*[@id=\"header-wrapper\"]/header/div[2]/div[4]/ul/li[2]/div/div/div/a")).
+	 * click(); //dr.navigate().refresh(); dr.manage().timeouts().implicitlyWait(10,
+	 * TimeUnit.SECONDS);
+	 * dr.findElement(By.xpath("//*[@id=\"createAccountBtn\"]/span")).click();
+	 * //dr.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	 * dr.findElement(By.id("dwfrm_profile_customer_firstname")).sendKeys(
+	 * "PrathyushaMJ");
+	 * dr.findElement(By.id("dwfrm_profile_customer_lastname")).sendKeys("M");
+	 * dr.findElement(By.id("dwfrm_profile_customer_email")).sendKeys(
+	 * "m.j.prathyusha12@gmail.com");
+	 * dr.findElement(By.id("dwfrm_profile_customer_emailconfirm")).sendKeys(
+	 * "m.j.prathyusha12@gmail.com");
+	 * dr.findElement(By.id("dwfrm_profile_login_password")).sendKeys("Mmurthy@2");
+	 * 
+	 * dr.findElement(By.id("dwfrm_profile_login_passwordconfirm")).sendKeys(
+	 * "Mmurthy@2"); dr.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	 * 
+	 * 
+	 * //*[@id="ltkpopup-close-button"]/a/svg dr.findElement(By.xpath(
+	 * "//*[@id=\"RegistrationForm\"]/fieldset/div[4]/button")).click();
+	 * 
+	 * dr.navigate().refresh();
+	 * 
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
 
-	@When("Verify user is able to Login Lumens  application")
-	public void verify_user_is_able_to_Login_Lumens_application() {
+	@When("Verify user is able to Login Lumens  applicationC")
+	public void verify_user_is_able_to_Login_Lumens_application() throws IOException {
 		dr.navigate().refresh();
 		Actions actions = new Actions(dr);
 		WebElement newaccount = dr.findElement(By.xpath("//*[@id=\"header-wrapper\"]/header/div[2]/div[4]/ul/li[2]/div/button/i"));
 		actions.moveToElement(newaccount).perform();
-		dr.findElement(By.id("dwfrm_login_username")).sendKeys("m.j.prathyusha12@gmail.com");
-		dr.findElement(By.name("dwfrm_login_password")).sendKeys("Mmurthy@2");
+		//dr.findElement(By.id("dwfrm_login_username")).sendKeys("m.j.prathyusha12@gmail.com");
+		//dr.findElement(By.name("dwfrm_login_password")).sendKeys("Mmurthy@2");
+		
+		//dr.get("https://www.lumens.com/");
+		actions.moveToElement(newaccount).perform();
+		
+		dr.findElement(By.xpath("(//a[@class= 'userlogin'])[1]")).click();	
+		
+		
+		
+		  File src = new File("C:\\Users\\Apple\\Desktop\\Excellogin.xlsx");
+          FileInputStream fls = new FileInputStream(src);
+          @SuppressWarnings("resource")
+		XSSFWorkbook xsf = new XSSFWorkbook(fls);
+          XSSFSheet sheet = xsf.getSheetAt(0);
+         
+		String Username = sheet.getRow(1).getCell(0).getStringCellValue();
+         
+		String password = sheet.getRow(1).getCell(1).getStringCellValue();
+          dr.findElement(By.id("dwfrm_login_username")).sendKeys(Username);
+  		  dr.findElement(By.name("dwfrm_login_password")).sendKeys(password);
+		
 		dr.findElement(By.name("dwfrm_login_login")).click();
 	   
 	}
 
-	@When("Verify title of the Lumens application")
+	@When("Verify title of the Lumens applicationC")
 	public void verify_title_of_the_Lumens_application() {
 		 if (dr.getTitle().equals("Modern Lighting, Ceiling Fans, Furniture & Home Decor | Lumens.com"))
          {
@@ -93,7 +129,7 @@ public class Lumens {
 	    
 	}
 
-	@Then("Verify user is able to select Ceiling Lights from lightning Tab")
+	@Then("Verify user is able to select Ceiling Lights from lightning TabC")
 	public void verify_user_is_able_to_select_Ceiling_Lights_from_lightning_Tab() {
 		Actions actions = new Actions(dr);
 		WebElement newaccount = dr.findElement(By.xpath("//*[@id=\"nav-tab-01\"]/a/span[1]"));
@@ -102,7 +138,7 @@ public class Lumens {
 	    
 	}
 
-	@Then("Verify  user is able to select  the specific product by applying  filter")
+	@Then("Verify  user is able to select  the specific product by applying  filterC")
 	public void verify_user_is_able_to_select_the_specific_product_by_applying_filter() {
 		dr.findElement(By.xpath("//*[@id=\"main\"]/div[2]/div[2]/div[4]/div[1]/a")).click();
 		WebElement radio2 = dr.findElement(By.xpath("//*[@id=\"refinement-LU_BestSellerScore\"]/div/ul/li[1]/a/span[1]/input"));
@@ -115,7 +151,7 @@ public class Lumens {
 	   
 	}
 
-	@Then("Verify  user is able to add the selected product to the cart")
+	@Then("Verify  user is able to add the selected product to the cartC")
 	public void verify_user_is_able_to_add_the_selected_product_to_the_cart() {
 		 dr.get("https://www.lumens.com/saucer-bubble-pendant-by-nelson-bubble-lamps-GNBP151340.html?cgid=2#prefn1=LU_BestSellerScore&prefv1=1%20business%20day&tileIndex=1");
 		
@@ -128,7 +164,7 @@ public class Lumens {
 		
 	}
 
-	@Then("Verify  user is able to view  the added product in the cart")
+	@Then("Verify  user is able to view  the added product in the cartC")
 	public void verify_user_is_able_to_view_the_added_product_in_the_cart() {
 		dr.findElement(By.xpath("//*[@id=\"atcModal\"]/div/div/div/div/div/div[2]/div[2]/a[1]")).click();
 		dr.findElement(By.name("dwfrm_cart_shipments_i0_items_i0_quantity")).sendKeys("1");
@@ -140,7 +176,7 @@ public class Lumens {
 	    
 	}
 	
-	@After("@browser")
+	@After("@browserC")
 	public void tearDown(Scenario scenario) {
 	    if (scenario.isFailed()) {
 	            final byte[] screenshot = ((TakesScreenshot) dr)
@@ -150,53 +186,53 @@ public class Lumens {
 	    dr.close();
 	}
 
-	@Then("Verify user is able to search the product")
+	@Then("Verify user is able to search the productC")
 	public void verify_user_is_able_to_search_the_product() {
 	    
 	}
 
-	@Then("Verify user is able to login Live chat by entering valid credentials")
+	@Then("Verify user is able to login Live chat by entering valid credentialsC")
 	public void verify_user_is_able_to_login_Live_chat_by_entering_valid_credentials() {
 		
 	    
 	}
 
-	@Then("Verify user is not  able login View chat by entering invalid credentials")
+	@Then("Verify user is not  able login View chat by entering invalid credentialsC")
 	public void verify_user_is_not_able_login_View_chat_by_entering_invalid_credentials() {
 	    
 	}
 
-	@Then("Verify the product able to remove from cart")
+	@Then("Verify the product able to remove from cartC")
 	public void verify_the_product_able_to_remove_from_cart() {
 	   
 	}
 
-	@Then("Verify user able to apply coupon code")
+	@Then("Verify user able to apply coupon codeC")
 	public void verify_user_able_to_apply_coupon_code() {
 	   
 	}
 
-	@Then("Verify scroll up, scroll down action")
+	@Then("Verify scroll up, scroll down actionC")
 	public void verify_scroll_up_scroll_down_action() {
 	    
 	}
 
-	@Then("Verify the home page")
+	@Then("Verify the home pageC")
 	public void verify_the_home_page() {
 	    
 	}
 
-	@Then("Verify ZIP code")
+	@Then("Verify ZIP codeC")
 	public void verify_ZIP_code() {
 	    
 	}
 
-	@Then("Verify Quantity")
+	@Then("Verify QuantityC")
 	public void verify_Quantity() {
 	    
 	}
 
-	@Then("Verify Logout page")
+	@Then("Verify Logout pageC")
 	public void verify_Logout_page() {
 	   
 	}
